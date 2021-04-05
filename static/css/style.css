@@ -1,0 +1,12 @@
+#preview {
+    border:1px solid gray;
+    width:300px;
+}
+
+a:visited {
+    color: blue;
+}
+
+#error {
+    color: red;
+}
