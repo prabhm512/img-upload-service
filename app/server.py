@@ -5,13 +5,13 @@ from io import BytesIO
 app = Flask(__name__)
 
 
-# Listen for GET requests to yourdomain.com/account/
+# Listen for GET requests to /
 @app.route("/")
 def account():
     # Show the account-edit HTML page:
     return render_template('index.html')
 
-# Listen for GET requests to yourdomain.com/sign_s3/
+# Listen for GET requests to /sign_s3/
 @app.route('/sign-s3/')
 def sign_s3():
     # Load necessary information into the application
