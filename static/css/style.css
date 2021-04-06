@@ -10,3 +10,27 @@ a:visited {
 #error {
     color: red;
 }
+
+.navbar {
+    background-color: blue;
+}
+
+.navbar-brand.mb-0.h1 {
+    color: white;
+}
+
+.alert.alert-warning p {
+    text-align: center;
+}
+
+.alert.alert-danger {
+    display: none;
+}
+
+#status, #file-input {
+    margin-bottom: 15px;
+}
+
+#links {
+    margin-bottom: 70px;
+}

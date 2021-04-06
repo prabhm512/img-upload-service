@@ -19,13 +19,15 @@ function uploadFile(file, s3Data, url){
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4){
             if(xhr.status === 200 || xhr.status === 204){
-                document.getElementById('preview').src = url;
-                document.getElementById('avatar-url').value = url;
-                // Push links into array
-                links.push(url);
-                // Update localStorage
-                localStorage.setItem('imgLinks', JSON.stringify(links));
-                document.getElementById('links').innerHTML += `<a href='${url}' target="blank">${url}</a><br>`;
+                if (file.type!=="application/x-zip-compressed") {
+                    document.getElementById('preview').src = url;
+                    document.getElementById('avatar-url').value = url;
+                    // Push links into array
+                    links.push(url);
+                    // Update localStorage
+                    localStorage.setItem('imgLinks', JSON.stringify(links));
+                    document.getElementById('links').innerHTML += `<a href='${url}' target="blank">${url}</a><br>`;
+                } 
             }
             else{
                 alert('Could not upload file.');
@@ -57,7 +59,7 @@ function getSignedRequest(file){
         }
     };
     xhr.send();
-    }
+}
 
 /*
     Function called when file input updated. If there is a file selected, then
@@ -89,20 +91,26 @@ function startUpload(mockFile = 0) {
     }
 
     // Do not get signed request if file does not meet following criteria.
-    if (file.size > 2000000) {
-        error += "File size must be under 2MB!";
+    if (file.size > 4000000) {
+        error += "File size must be under 4MB!";
     } 
     // Only allow image files
     else if (file.type==="image/jpg" || file.type==="image/jpeg" || file.type==="image/png" || file.type==="image/gif" || file.type==="image/bmp" || file.type==="image/tiff") {
+        $("#error").css("display", "none");
         getSignedRequest(file);
     }
+    else if (file.type==="application/x-zip-compressed") {
+        error += "This file type will be supported soon. It will allow multiple images to be uploaded at once.";
+    }
     else {
-        error += "Only image files can be uploaded!"; 
+        error += "This file type is not supported!"; 
     }
     if (error !== "" && mockFile===0) {
         document.getElementById("error").innerHTML = error
+        $("#error").css("display", "block");
     }
 }
+
 // Links should persist
 function init() {
     let storedLinks;
@@ -123,17 +131,16 @@ function init() {
 /*
     Bind listeners when the page loads.
 */
-// (() => {
-//     document.getElementById("file-input").addEventListener("change", function() {
-//         startUpload();
-//     })
-// })();
 
 $(document).ready(() => {
     init();
     $('#file-input').on("change", () => {
         startUpload();
-    });   
+    }); 
+    
+    // $('#zip-file-input').on("change", () => {
+    //     startUpload();
+    // })
 })
     
 
