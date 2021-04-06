@@ -11,8 +11,8 @@
     #   - lib/source2.js
     #   - dist/**/*.js
     #
-    src_files: 
-      - static/js/script.js
+    src_files:
+      - app/static/js/script.js
 
     # stylesheets
     #
@@ -62,7 +62,7 @@
     #
     # src_dir: public
     #
-    src_dir: 
+    src_dir:
 
     # spec_dir
     #
@@ -107,3 +107,4 @@
     # random: false
     #
     random:
+    

@@ -34,7 +34,7 @@ describe("script.js", function() {
     //     });
     // })
     
-    describe("getSignedRequest", function() {
+    describe("startUpload", function() {
 
         // Test for files over 2MB
         it ("should not go into the process of getting a presigned request if uploaded file is over 2MB", function() {
